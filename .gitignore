@@ -1,4 +1,3 @@
-
 # Created by https://www.gitignore.io/api/macos,windows,eclipse
 
 ### Eclipse ###
@@ -58,6 +57,9 @@ local.properties
 .cache-main
 .scala_dependencies
 .worksheet
+
+# Maven Dependencies
+pom.xml
 
 ### Eclipse Patch ###
 # Eclipse Core
@@ -126,3 +128,4 @@ $RECYCLE.BIN/
 
 
 # End of https://www.gitignore.io/api/macos,windows,eclipse
+/target/
