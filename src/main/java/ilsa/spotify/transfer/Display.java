@@ -1,4 +1,4 @@
-package ilsa.spotify.models;
+package ilsa.spotify.transfer;
 
 /**
  * @author ilsadejager

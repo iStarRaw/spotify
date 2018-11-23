@@ -8,8 +8,8 @@ import java.util.List;
 import java.util.Scanner;
 
 import ilsa.spotify.models.Album;
-import ilsa.spotify.models.Display;
-import ilsa.spotify.models.StringFile;
+import ilsa.spotify.transfer.Display;
+import ilsa.spotify.transfer.StringFile;
 
 /**
  * Hello world!
@@ -25,7 +25,13 @@ public class App {
     	
     	
     	for (URL file : fileBook) {
-    		readFile(FILE_SPOTIFY);
+    		try {
+				readFile(FILE_SPOTIFY);
+			} catch (FileNotFoundException e) {
+				// TODO Auto-generated catch block
+				System.out.println("Not able to find your file.");
+				e.printStackTrace();
+			}
     		
     	}
     		
