@@ -28,7 +28,6 @@ public class App {
     		try {
 				readFile(FILE_SPOTIFY);
 			} catch (FileNotFoundException e) {
-				// TODO Auto-generated catch block
 				System.out.println("Not able to find your file.");
 				e.printStackTrace();
 			}
