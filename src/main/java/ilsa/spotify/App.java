@@ -11,10 +11,6 @@ import ilsa.spotify.models.Album;
 import ilsa.spotify.transfer.Display;
 import ilsa.spotify.transfer.StringFile;
 
-/**
- * Hello world!
- *
- */
 public class App {
     public static void main( String[] args ) {
     	final URL FILE_SPOTIFY = App.class.getClassLoader().getResource("spotify.txt");
@@ -65,6 +61,14 @@ public class App {
     }
 
 	private static void readFile(URL file) throws FileNotFoundException{
+		
+		
+		//if line starts with CDS
+		
+		//if line starts with CD then add this line as CD
+		//for the next lines with SONG make new Song & addSong to CD 
+		
+		
 //			List<String> line = calculateDimensions(file);
 //			StringFile sf = new StringFile(dimensions);
 //			
