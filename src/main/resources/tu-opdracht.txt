@@ -144,6 +144,7 @@ Make sure new CDs/songs cannot be added during shuffling.
 Hint: even if you are not able to implement the shuffling in the short period of time
 that you have, you can still implement the multi-threading. In that case, have a
 separate thread print “Sorting to be implemented” to the screen.
+
 Overview of the composition of your grade (total: 10)
 - 2.5 for compilation; if it doesn’t compile à final score = 1
 - 1 for a well thought-out application of inheritance
