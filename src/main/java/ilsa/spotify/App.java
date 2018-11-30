@@ -60,22 +60,12 @@ public class App {
     	
     }
 
-	private static void readFile(URL file) throws FileNotFoundException{
-		
-		
-		//if line starts with CDS
-		
-		//if line starts with CD then add this line as CD
-		//for the next lines with SONG make new Song & addSong to CD 
-		
-		
-//			List<String> line = calculateDimensions(file);
-//			StringFile sf = new StringFile(dimensions);
-//			
-//			try (Scanner readLine = new Scanner(new FileReader(file.getFile()))) {
+	private static void readFile(URL file) throws FileNotFoundException {
+			StringFile sf = new StringFile();
+			
+			try (Scanner readLine = new Scanner(new FileReader(file.getFile()))) {
 //
-//				while (readLine.hasNextLine()) {
-//							
+				while (readLine.hasNextLine()) {
 //					for (int row = 0; row < sf.getMyMultiStringArray().length; row++) {
 //						for (int column = 0; column < sf.getMyMultiStringArray()[row].length; column++) {
 //							if (readLine.hasNext()) {
@@ -84,9 +74,8 @@ public class App {
 //						}
 //					}
 //				}
-//			}
-//			return sf;
-//		}
+			}
+		}
 		
 	}
 }
