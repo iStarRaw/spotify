@@ -8,17 +8,17 @@ package ilsa.spotify.models;
  * ADD ING Bank, 0:20
  *
  */
-public class Add {
+public class Advertisement {
 	private String advertiser;
 	private int length;
 	private final String PREFIX_ADD = "ADD";
 	private final String SEPERATOR = " ,";
 	
-	public Add() {
+	public Advertisement() {
 		
 	}
 	
-	public Add(String advertiser, int length) {
+	public Advertisement(String advertiser, int length) {
 		this.advertiser = advertiser;
 		this.length = length;
 	}
