@@ -75,7 +75,7 @@ public class App {
 //			try (Scanner readLine = new Scanner(new FileReader(file.getFile()))) {
 //
 //				while (readLine.hasNextLine()) {
-//					
+//							
 //					for (int row = 0; row < sf.getMyMultiStringArray().length; row++) {
 //						for (int column = 0; column < sf.getMyMultiStringArray()[row].length; column++) {
 //							if (readLine.hasNext()) {
