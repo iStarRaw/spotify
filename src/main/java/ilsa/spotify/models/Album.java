@@ -15,7 +15,7 @@ public class Album {
 	private String name;
 	private int releaseYear;
 	private final String PREFIX_CD = "CD";
-	private final String SEPERATOR = " ,";
+	private final String SEPERATOR = ", ";
 	
 	public Album(String artist, String name, int releaseDate) {
 		this.artist = artist;

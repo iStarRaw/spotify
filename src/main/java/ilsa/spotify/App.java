@@ -21,6 +21,7 @@ public class App {
 		for (URL file : fileBook) {
 			try {
 				StringFile sf = readFile(file);
+				sf.splitLines();
 				
 				
 			} catch (FileNotFoundException e) {
