@@ -7,33 +7,35 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-import ilsa.spotify.models.Album;
-import ilsa.spotify.transfer.Display;
 import ilsa.spotify.transfer.StringFile;
 
 public class App {
-    public static void main( String[] args ) {
-    	final URL FILE_SPOTIFY = App.class.getClassLoader().getResource("spotify.txt");
-    	
-    	List<URL> fileBook = new ArrayList<>();
-    	
-    	fileBook.add(FILE_SPOTIFY);
-    	
-    	
-    	for (URL file : fileBook) {
-    		try {
-				readFile(FILE_SPOTIFY);
+	public static void main(String[] args) {
+		final URL FILE_SPOTIFY = App.class.getClassLoader().getResource("spotify.txt");
+
+		List<URL> fileBook = new ArrayList<>();
+		fileBook.add(FILE_SPOTIFY);
+		
+		
+
+		for (URL file : fileBook) {
+			try {
+				StringFile sf = readFile(file);
+				
+				
 			} catch (FileNotFoundException e) {
 				System.out.println("Not able to find your file.");
 				e.printStackTrace();
 			}
-    		
-    	}
-    		
-    	Display.printMenu();
-    	Scanner input = new Scanner(System.in);
-    	int choice = input.nextInt();
-    	
+
+		}
+		
+		
+
+//		Display.printMenu();
+//		Scanner input = new Scanner(System.in);
+//		int choice = input.nextInt();
+//
 //    	switch (choice) {
 //		case 1:
 //			showPlaylist();
@@ -54,28 +56,19 @@ public class App {
 //			
 //			break;
 //    	}
-    	
-    	
-    	
-    	
-    }
 
-	private static void readFile(URL file) throws FileNotFoundException {
-			StringFile sf = new StringFile();
-			
-			try (Scanner readLine = new Scanner(new FileReader(file.getFile()))) {
-//
-				while (readLine.hasNextLine()) {
-//					for (int row = 0; row < sf.getMyMultiStringArray().length; row++) {
-//						for (int column = 0; column < sf.getMyMultiStringArray()[row].length; column++) {
-//							if (readLine.hasNext()) {
-//							sf.getMyMultiStringArray()[row][column] = readLine.next();
-//							}
-//						}
-//					}
-//				}
+	}
+
+	private static StringFile readFile(URL file) throws FileNotFoundException {
+		StringFile sf = new StringFile();
+
+		try (Scanner readLine = new Scanner(new FileReader(file.getFile()))) {
+			while (readLine.hasNextLine()) {
+				sf.getLines().add(readLine.nextLine());
 			}
+			System.out.println(sf.toString());
 		}
-		
+		return sf;
+
 	}
 }

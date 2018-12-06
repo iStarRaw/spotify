@@ -6,8 +6,8 @@ prototype in Java, which can later be extended to a full-fledged Android app.
 Obviously, this product offering should be different from the paid offer to download
 music, that is why Spotify is exploring songs that you can listen to once, after which
 the song will be deleted. 
-Advertisements are also a big part of Spotify’s business
-model, so you will have to alternate songs and adds during play.
+
+Advertisements are also a big part of Spotify’s business model, so you will have to alternate songs and adds during play.
 
 The prototype application that you should develop reads in a manifest file that
 contains:

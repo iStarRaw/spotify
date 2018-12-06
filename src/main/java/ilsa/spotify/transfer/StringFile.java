@@ -11,6 +11,14 @@ public class StringFile {
 	public StringFile() {
 		lines = new ArrayList<>();
 	}
+	
+	
+
+	public List<String> getLines() {
+		return lines;
+	}
+
+
 
 	// TODO doorlopen lines and splitten in CD, SONG & ADDS
 	public void splitLines() {
@@ -19,6 +27,15 @@ public class StringFile {
 		
 		// for the next lines with SONG make new Song & addSong to CD
 
+	}
+	
+	@Override
+	public String toString() {
+		StringBuilder lineFile = new StringBuilder();
+		  lines.forEach(  
+		            (line)->lineFile.append(line).append("\n")  
+		        );
+		return lineFile.toString(); 
 	}
 	
 }
