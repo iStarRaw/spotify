@@ -21,7 +21,7 @@ public class Song {
 		this.title = title;
 		this.lengthString = length;
 		
-		convertLengthToDuration();
+//		convertLengthToDuration();
 		
 	}
 

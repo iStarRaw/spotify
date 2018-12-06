@@ -5,6 +5,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import ilsa.spotify.models.Album;
+import ilsa.spotify.models.Song;
 
 public class StringFile {
 	private List<String> lines;
@@ -24,13 +25,27 @@ public class StringFile {
 			// if line starts with CD then add this line as CD
 			if (line.startsWith("CD ")) {
 				saveAlbum(line);
+			} else if (line.startsWith("SONG ")) {
+				saveSong(line);
+				//TODO add song to album
 			}
 			
 		}
 		
 		
-		// for the next lines with SONG make new Song & addSong to CD
 
+	}
+
+	private void saveSong(String line) {
+		String[] words = line.split(",");
+		int trackNumber = Integer.parseInt(words[0].substring(5));
+		String title = words[1].trim();
+		String length = words[2].trim();
+		
+		Song song = new Song(trackNumber, title, length);
+		//TODO add song to album
+		System.out.println(song.toString());
+		
 	}
 
 	private void saveAlbum(String line) {
