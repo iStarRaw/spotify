@@ -31,5 +31,15 @@ public class Display {
 		System.out.println(menu.toString());
 		
 	}
+	
+	public static void printAddCD() {
+	}
+	
+	public static void printPlayList() {
+		
+	}
+
+
+	
 
 }
