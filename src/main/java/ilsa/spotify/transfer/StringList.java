@@ -1,21 +1,19 @@
 package ilsa.spotify.transfer;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import ilsa.spotify.models.Album;
 import ilsa.spotify.models.Song;
 
-public class StringFileIn {
+public class StringList {
 	private List<String> lines;
 
-	public StringFileIn() {
+	public StringList() {
 		lines = new ArrayList<>();
 	}
 	
 	
-
 	public List<String> getLines() {
 		return lines;
 	}
@@ -57,12 +55,11 @@ public class StringFileIn {
 			} else if (line.startsWith("SONG ")) {
 				saveSong(line);
 				//TODO add song to album
-			}
-			
+				//waar maak ik album aan??
+				
+				
+			}	
 		}
-		
-		
-
 	}
 	
 	@Override

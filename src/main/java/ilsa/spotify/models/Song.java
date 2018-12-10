@@ -1,27 +1,20 @@
 package ilsa.spotify.models;
 
-import java.time.Duration;
 
 /**
  * @author ilsadejager A song has a track number, a title and a length
  *         (minutes:seconds). SONG 1, Don’t Panic, 2:17
  *
  */
-public class Song {
+public class Song extends Item {
 	private int trackNumber;
 	private String title;
-	private String lengthString;
-	private final String SEPERATOR = " ,";
-	private final String PREFIX_SONG = "SONG";
-	private int totalSecs = 0;
-	private int minutes = (totalSecs % 3600) / 60;
-	private int seconds = totalSecs % 60;
-	private String timeString = "";
 	
+	private final String PREFIX_SONG = "SONG";
 
 	public Song(int trackNumber, String title, String length) {
 		this.trackNumber = trackNumber;
-		this.title = title;
+		this.name = title;
 		this.lengthString = length;
 
 		calculateSecs(this.lengthString);
@@ -32,14 +25,6 @@ public class Song {
 
 	public Song() {
 
-	}
-
-	private int calculateSecs(String lengthString) {
-		String[] parts = lengthString.split(":");
-		int minutes = Integer.parseInt(parts[0]);
-		int seconds = Integer.parseInt(parts[1]);
-
-		return seconds + (minutes * 60);
 	}
 
 	@Override
