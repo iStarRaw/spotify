@@ -35,6 +35,8 @@ public class App {
 		
 		Playlist player = new Playlist(null, null); //hier moeten songs en adds in
 		
+		
+		
 		Scanner input = new Scanner(System.in);
 		int choice = input.nextInt();
 
@@ -58,6 +60,8 @@ public class App {
 
 			break;
 		}
+		
+		input.close();
 
 	}
 
