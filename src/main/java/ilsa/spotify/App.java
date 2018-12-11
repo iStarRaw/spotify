@@ -33,7 +33,7 @@ public class App {
 
 		Display.printMenu();
 		
-		Playlist player = new Playlist(null, null); //hier moeten songs en adds in
+		Playlist player = new Playlist();
 		
 		
 		

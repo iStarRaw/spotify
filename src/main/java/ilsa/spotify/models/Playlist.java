@@ -6,12 +6,12 @@ import java.util.Scanner;
 
 public class Playlist implements Player {
 	private List<Item> items;
-	private List<Song> songs;
-	private List<Advertisement> adds;
+//	private List<Song> songs;
+//	private List<Advertisement> adds;
 	
-	public Playlist(List<Song> songs, List<Advertisement> adds) {
-		this.songs = songs;
-		this.adds = adds;
+	public Playlist() {
+//		this.songs = songs;
+//		this.adds = adds;
 		items = new ArrayList<>();
 
 	}
@@ -82,11 +82,13 @@ public class Playlist implements Player {
 //	Through questions you ask the user to fill in all the necessary data for the CD and the
 //	songs in the CD. To ease reading in, you may ask the user to specify the number of
 //	songs he/she is going to enter.
+	
 //	After adding the CD+songs, add the songs to the playlist and introduce adds in
 //	between the songs (for ease you can start at the first add again).
 	
 	@Override
 	public void addCD() {
+		System.out.println("PLEASE ENTER CD DETAILS.");
 		System.out.print("CD\nArtist: ");
 		Scanner input = new Scanner(System.in);
 		String artist = input.next();
@@ -100,12 +102,14 @@ public class Playlist implements Player {
 
 		Album album = new Album(artist, name, releaseDate);
 
-		System.out.print("\nYOU CAN ENTER THE SONGS HERE. (0 WHEN READY).\n\nSONGS");
-		int trackNumber = 0;
+		System.out.println("Total number of tracks: ");
+		int trackTotal = input.nextInt();
+		album.setTrackTotal(trackTotal);
 		
-		do {
-			System.out.print("\nTrack number: ");
-			trackNumber = input.nextInt();
+		System.out.print("\nPLEASE ENTER SONG DETAILS.");
+		for (int i = 0; i < trackTotal; i++) {
+			int trackNumber = i+1;
+			System.out.printf("\nTrack number: %d\n", trackNumber);
 			
 			System.out.print("Song title: ");
 			String title = input.next();
@@ -115,8 +119,7 @@ public class Playlist implements Player {
 			
 			Song song = new Song(trackNumber, title, length);
 			album.addSong(song);
-			
-		} while (trackNumber != 0);
+		}
 		
 		input.close();
 		

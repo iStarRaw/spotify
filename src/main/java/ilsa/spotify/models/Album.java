@@ -11,6 +11,7 @@ import java.util.List;
  */
 public class Album {
 	private List<Song> songs;
+	private int trackTotal = 0;
 	private String artist;
 	private String name;
 	private int releaseYear;
@@ -28,6 +29,15 @@ public class Album {
 		
 	}
 	
+	
+	public int getTrackTotal() {
+		return trackTotal;
+	}
+
+	public void setTrackTotal(int trackTotal) {
+		this.trackTotal = trackTotal;
+	}
+
 	public void addSong(Song song) {
 		songs.add(song);
 		
