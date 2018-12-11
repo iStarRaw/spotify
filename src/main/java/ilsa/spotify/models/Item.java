@@ -10,8 +10,6 @@ abstract class Item {
 	int seconds = totalSecs % 60;
 	String timeString = "";
 		
-	final String SEPERATOR = " ,";
-	
 	int calculateSecs(String lengthString) {
 		String[] parts = lengthString.split(":");
 		int minutes = Integer.parseInt(parts[0]);

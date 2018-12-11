@@ -7,7 +7,7 @@ package ilsa.spotify.models;
  *
  */
 public class Advertisement extends Item {
-	private final String PREFIX_ADD = "ADD";
+	private final String PREFIX_ADD = "NEXT ADD: ";
 	
 	public Advertisement() {
 		
@@ -18,11 +18,12 @@ public class Advertisement extends Item {
 		this.lengthString = lengthString;
 	}
 	
+//	Next add: ING Bank (0:20)
 	
 	@Override
 	public String toString() {
 		StringBuilder addString = new StringBuilder();
-		addString.append(PREFIX_ADD).append(" ").append(name).append(SEPERATOR).append(lengthString);
+		addString.append(PREFIX_ADD).append(name).append(" (").append(lengthString).append(")");
 		
 		return addString.toString();
 	}

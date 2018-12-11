@@ -121,6 +121,7 @@ all adds should be written back to file, also those that have been played).
 
 Option 5
 The application stops.
+
 Some important things to consider for this assignment:
 - Think about the usefulness of applying inheritance.
 - When writing to the file spotify.txt, the old version of the file should be

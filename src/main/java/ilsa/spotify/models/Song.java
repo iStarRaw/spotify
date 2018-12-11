@@ -10,7 +10,7 @@ public class Song extends Item {
 	private int trackNumber;
 	private String title;
 	
-	private final String PREFIX_SONG = "SONG";
+	private final String PREFIX_TRACK = "TRACK: ";
 
 	public Song(int trackNumber, String title, String length) {
 		this.trackNumber = trackNumber;
@@ -27,14 +27,16 @@ public class Song extends Item {
 
 	}
 
+//	Track The Miracle (4:15)
+	
 	@Override
 	public String toString() {
 		StringBuilder songString = new StringBuilder();
-		songString.append(PREFIX_SONG).append(" ").append(trackNumber).append(SEPERATOR).append(title).append(SEPERATOR)
-				.append(timeString);
+		songString.append(PREFIX_TRACK).append(title).append(" (")
+				.append(timeString).append(")");
 
 		return songString.toString();
 
 	}
-
+	
 }

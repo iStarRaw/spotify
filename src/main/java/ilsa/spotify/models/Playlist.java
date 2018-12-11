@@ -1,36 +1,25 @@
 package ilsa.spotify.models;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Scanner;
 
 public class Playlist implements Player {
-	private List<Item> items;
-//	private List<Song> songs;
-//	private List<Advertisement> adds;
+	private List<Song> songs;
+	private List<Item> playList;
+	private List<Advertisement> adverts;
 	
 	public Playlist() {
-//		this.songs = songs;
-//		this.adds = adds;
-		items = new ArrayList<>();
+		playList = new ArrayList<>();
+		adverts = new ArrayList<>();
+		songs = new ArrayList<>();
 
 	}
-
-	
-
-//	The playlist is shown on screen in the following format:
-//		Album: U2’s Songs of Innocence
-//		Track The Miracle (4:15)
-//		Next add: ING Bank (0:20)
-//		Album: U2’s Songs of Innocence
-//		Track Every Breaking Wave (4:12)
-//		Next add: Bol.com (0:15)
 	
 	@Override
 	public void show() {
-		// TODO Auto-generated method stub
-		
-		
+		System.out.println(this.toString());
 	}
 
 
@@ -68,13 +57,27 @@ public class Playlist implements Player {
 	
 	@Override
 	public void play() {
-		// TODO Auto-generated method stub
+		Song firstSong = (Song) playList.get(0);
+		Advertisement firstAd = (Advertisement) playList.get(1);
+		
+		System.out.println(firstSong.toString());
+		System.out.println(firstAd.toString());
+		
+		playList.remove(0);
+		playList.remove(1);
+		
+		for (Iterator<Song> iterator = songs.iterator(); iterator.hasNext();) {
+			Song song = iterator.next();
+			if (song.equals(firstSong)) {
+				iterator.remove();
+			}
+		}
 		
 	}
 
 	@Override
 	public void stop() {
-		// TODO Auto-generated method stub
+		System.out.println("Thank you for playing, the application has stopped :-)");
 		
 	}
 
@@ -102,7 +105,7 @@ public class Playlist implements Player {
 
 		Album album = new Album(artist, name, releaseDate);
 
-		System.out.println("Total number of tracks: ");
+		System.out.print("Total number of tracks: ");
 		int trackTotal = input.nextInt();
 		album.setTrackTotal(trackTotal);
 		
@@ -111,8 +114,10 @@ public class Playlist implements Player {
 			int trackNumber = i+1;
 			System.out.printf("\nTrack number: %d\n", trackNumber);
 			
+			input.nextLine(); //reset scanner
+			
 			System.out.print("Song title: ");
-			String title = input.next();
+			String title = input.nextLine();
 			
 			System.out.print("Length (minutes:seconds): ");
 			String length = input.next();
@@ -123,12 +128,35 @@ public class Playlist implements Player {
 		
 //		After adding the CD+songs, add the songs to the playlist and introduce adds in
 //		between the songs (for ease you can start at the first add again).
-		items.addAll(album.getSongs());
+		playList.addAll(album.getSongs());
 		
+		for (int i = 0; i < playList.size() - 1; i++) {
+			
+		}
+		
+		playList.addAll(adverts);
 		
 		
 		input.close();
 		
+	}
+	
+	
+//	The playlist is shown on screen in the following format:
+//	Album: U2’s Songs of Innocence
+//	Track The Miracle (4:15)
+//	Next add: ING Bank (0:20)
+//	Album: U2’s Songs of Innocence
+//	Track Every Breaking Wave (4:12)
+//	Next add: Bol.com (0:15)
+	public String toString() {
+		StringBuilder playListString = new StringBuilder();
+		
+		for (Item item: playList) {
+			System.out.println(item.toString());
+		}
+		
+		return playListString.toString();
 	}
 
 }
