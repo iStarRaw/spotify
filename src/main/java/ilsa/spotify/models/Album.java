@@ -29,7 +29,10 @@ public class Album {
 		
 	}
 	
-	
+	public List<Song> getSongs() {
+		return songs;
+	}
+
 	public int getTrackTotal() {
 		return trackTotal;
 	}

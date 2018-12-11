@@ -16,27 +16,22 @@ public class App {
 
 	public static void main(String[] args) {
 
-		List<URL> fileBook = new ArrayList<>();
-		fileBook.add(FILE_SPOTIFY);
+		System.out.println("Please give the URL of your file: ");
+		Scanner input = new Scanner(System.in);
+		URL file = new URL(input.nextLine());
 
-		for (URL file : fileBook) {
-			try {
-				StringList sf = readFile(file);
-				sf.splitLines();
-
-			} catch (FileNotFoundException e) {
-				System.out.println("Not able to find your file.");
-				e.printStackTrace();
-			}
-
+		try {
+			StringList sl = readFile(file);
+			sl.splitLines();
+		} catch (FileNotFoundException e) {
+			System.out.println("Not able to find your file.");
+			e.printStackTrace();
 		}
 
 		Display.printMenu();
-		
+
 		Playlist player = new Playlist();
-		
-		
-		
+
 		Scanner input = new Scanner(System.in);
 		int choice = input.nextInt();
 
@@ -60,12 +55,11 @@ public class App {
 
 			break;
 		}
-		
+
 		input.close();
 
 	}
 
-	
 	private static StringList readFile(URL file) throws FileNotFoundException {
 		StringList sf = new StringList();
 

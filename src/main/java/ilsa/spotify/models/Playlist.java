@@ -121,6 +121,12 @@ public class Playlist implements Player {
 			album.addSong(song);
 		}
 		
+//		After adding the CD+songs, add the songs to the playlist and introduce adds in
+//		between the songs (for ease you can start at the first add again).
+		items.addAll(album.getSongs());
+		
+		
+		
 		input.close();
 		
 	}
