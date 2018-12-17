@@ -135,10 +135,7 @@ public class Playlist implements Player {
 		}
 		
 		playList.addAll(adverts);
-		
-		
-		input.close();
-		
+				
 	}
 	
 	
@@ -151,6 +148,7 @@ public class Playlist implements Player {
 //	Next add: Bol.com (0:15)
 	public String toString() {
 		StringBuilder playListString = new StringBuilder();
+		System.out.println("Playlist size: " + playList.size());
 		
 		for (Item item: playList) {
 			System.out.println(item.toString());

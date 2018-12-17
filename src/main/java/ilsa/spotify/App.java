@@ -25,11 +25,11 @@ public class App {
 			StringList sList = readFile(FILE_SPOTIFY);
 			sList.splitLines();
 			System.out.println(sList.toString());
-			
-			//opslaan als current playlist
+
+			// opslaan als current playlist
 //			player = 
-			
-			//show()
+
+			// show()
 
 		} catch (FileNotFoundException e) {
 			System.out.println("Not able to find your file.");
@@ -40,9 +40,8 @@ public class App {
 
 		do {
 			Display.printMenu();
-			choice = input.nextInt();
 
-			
+			choice = input.nextInt();
 
 			switch (choice) {
 			case 1:
@@ -58,7 +57,7 @@ public class App {
 //				should also be written back to file again.
 //				Similarly to the original file, the CDs/songs should go first. Then the adds (mind you,
 //				all adds should be written back to file, also those that have been played).
-				
+
 				try {
 					writeFile(FILE_SPOTIFY);
 				} catch (FileNotFoundException e) {
@@ -75,7 +74,6 @@ public class App {
 			}
 
 		} while (choice != 5);
-		input.close();
 
 	}
 
@@ -91,12 +89,11 @@ public class App {
 		return sList;
 
 	}
-	
+
 	private static StringList writeFile(URL file) throws FileNotFoundException {
 
-		
 		return null;
-		
+
 	}
 
 }
