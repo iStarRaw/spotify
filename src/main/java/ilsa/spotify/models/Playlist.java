@@ -18,25 +18,18 @@ public class Playlist implements Player {
 	}
 	
 	
-	
 	public List<Item> getPlayList() {
 		return playList;
 	}
-
-
 
 	public void setPlayList(List<Item> playList) {
 		this.playList = playList;
 	}
 
-
-
 	@Override
 	public void show() {
-		
 		System.out.println(this.toString());
 	}
-
 
 //	Instead of taking the first song in the playlist, you need to shuffle the playlist. You
 //	should do this by using appropriate functionality in the Collections class. After
@@ -72,14 +65,30 @@ public class Playlist implements Player {
 	
 	@Override
 	public void play() {
-		Song firstSong = (Song) playList.get(0);
-		Advertisement firstAd = (Advertisement) playList.get(1);
+		//vind eerste song in playList
+		Song firstSong = null;
+		Advertisement firstAd = null;
+		int indexFirstSong = 0;
 		
-		System.out.println(firstSong.toString());
-		System.out.println(firstAd.toString());
 		
-		playList.remove(0);
-		playList.remove(1);
+		//TODO waarschuwing weergeven als er geen songs meer in de lijst zitten
+		for (Item item : playList) {
+			if (item instanceof Song) {
+				firstSong = (Song) item;
+				indexFirstSong = playList.indexOf(firstSong);
+				System.out.println(firstSong.toString());
+				this.playList.remove(indexFirstSong);
+				
+				int indexAfterFirstSong = indexFirstSong;
+				Item itemAfterFirstSong = playList.get(indexAfterFirstSong);
+				
+				if (itemAfterFirstSong instanceof Advertisement) {
+					System.out.println(itemAfterFirstSong.toString());
+					this.playList.remove(indexAfterFirstSong);
+				}
+				break;
+			}
+		}
 		
 		for (Iterator<Song> iterator = songs.iterator(); iterator.hasNext();) {
 			Song song = iterator.next();
@@ -87,7 +96,6 @@ public class Playlist implements Player {
 				iterator.remove();
 			}
 		}
-		
 	}
 
 	@Override
@@ -163,8 +171,6 @@ public class Playlist implements Player {
 //	Next add: Bol.com (0:15)
 	public String toString() {
 		StringBuilder playListString = new StringBuilder();
-		System.out.println("Playlist size: " + playList.size());
-		
 		for (Item item: playList) {
 			System.out.println(item.toString());
 		}

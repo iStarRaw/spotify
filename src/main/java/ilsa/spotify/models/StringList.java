@@ -51,7 +51,6 @@ public class StringList {
 	}
 
 	public List<Item> makePlayList() {
-		// if line starts with CDS
 		Album album = new Album();
 		Song song = new Song();
 		Advertisement advert = new Advertisement();
