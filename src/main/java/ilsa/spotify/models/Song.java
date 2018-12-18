@@ -8,18 +8,17 @@ package ilsa.spotify.models;
  */
 public class Song extends Item {
 	private int trackNumber;
-	private String title;
 	
 	private final String PREFIX_TRACK = "TRACK: ";
 
-	public Song(int trackNumber, String title, String length) {
+	public Song(int trackNumber, String title, String lengthString) {
 		this.trackNumber = trackNumber;
 		this.name = title;
-		this.lengthString = length;
+		this.lengthString = lengthString;
 
-		calculateSecs(this.lengthString);
-		this.totalSecs = calculateSecs(lengthString);
-		this.timeString  = String.format("%02d:%02d", minutes, seconds);
+//		calculateSecs(this.lengthString);
+//		this.totalSecs = calculateSecs(lengthString);
+//		this.timeString  = String.format("%02d:%02d", minutes, seconds);
 
 	}
 
@@ -32,8 +31,8 @@ public class Song extends Item {
 	@Override
 	public String toString() {
 		StringBuilder songString = new StringBuilder();
-		songString.append(PREFIX_TRACK).append(title).append(" (")
-				.append(timeString).append(")");
+		songString.append(PREFIX_TRACK).append(this.name).append(" (")
+				.append(this.lengthString).append(")");
 
 		return songString.toString();
 

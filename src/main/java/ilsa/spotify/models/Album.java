@@ -51,7 +51,7 @@ public class Album {
 	@Override
 	public String toString() {
 		StringBuilder albumString = new StringBuilder();
-		albumString.append(PREFIX_ALBUM).append(artist).append("'s ").append(name).append("from ").append(releaseYear);
+		albumString.append(PREFIX_ALBUM).append(artist).append("'s ").append(name).append(" from ").append(releaseYear);
 		
 		return albumString.toString();
 		

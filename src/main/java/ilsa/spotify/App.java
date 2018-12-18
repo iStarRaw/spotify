@@ -5,9 +5,9 @@ import java.io.FileReader;
 import java.net.URL;
 import java.util.Scanner;
 
+import ilsa.spotify.models.Display;
 import ilsa.spotify.models.Playlist;
-import ilsa.spotify.transfer.Display;
-import ilsa.spotify.transfer.StringList;
+import ilsa.spotify.models.StringList;
 
 public class App {
 
@@ -23,8 +23,8 @@ public class App {
 
 		try {
 			StringList sList = readFile(FILE_SPOTIFY);
-			sList.splitLines();
-			System.out.println(sList.toString());
+			player.setPlayList(sList.makePlayList());
+			System.out.println(player.toString());
 
 			// opslaan als current playlist
 //			player = 

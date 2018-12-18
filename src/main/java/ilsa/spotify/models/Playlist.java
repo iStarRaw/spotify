@@ -17,8 +17,23 @@ public class Playlist implements Player {
 
 	}
 	
+	
+	
+	public List<Item> getPlayList() {
+		return playList;
+	}
+
+
+
+	public void setPlayList(List<Item> playList) {
+		this.playList = playList;
+	}
+
+
+
 	@Override
 	public void show() {
+		
 		System.out.println(this.toString());
 	}
 
