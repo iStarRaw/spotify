@@ -9,15 +9,14 @@ public class Playlist implements Player {
 	private List<Song> songs;
 	private List<Item> playList;
 	private List<Advertisement> adverts;
-	
+
 	public Playlist() {
 		playList = new ArrayList<>();
 		adverts = new ArrayList<>();
 		songs = new ArrayList<>();
 
 	}
-	
-	
+
 	public List<Item> getPlayList() {
 		return playList;
 	}
@@ -40,17 +39,17 @@ public class Playlist implements Player {
 //	Hint 1: using any other way for shuffling will not give you points.
 //	Hint 2: it might be that after shuffling songs and adds do not follow a nice pattern
 //	anymore (which is OK!)
-	
+
 //	Both for option 3 and 4 there is one more step to take: all songs that have not been
 //	played yet should be written back to file. In addition, all adds, whether played or not
 //	should also be written back to file again.
 //	Similarly to the original file, the CDs/songs should go first. Then the adds (mind you,
 //	all adds should be written back to file, also those that have been played).
-	
+
 	@Override
 	public void shuffle() {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 //	When the user selects play, the first song in the playlist is shown on screen, similarly
@@ -62,34 +61,38 @@ public class Playlist implements Player {
 //	should also be written back to file again.
 //	Similarly to the original file, the CDs/songs should go first. Then the adds (mind you,
 //	all adds should be written back to file, also those that have been played).
-	
+
 	@Override
 	public void play() {
-		//vind eerste song in playList
 		Song firstSong = null;
 		Advertisement firstAd = null;
 		int indexFirstSong = 0;
-		
-		
-		//TODO waarschuwing weergeven als er geen songs meer in de lijst zitten
+
+		// TODO wat gebeurt er met een playList zonder songs???
 		for (Item item : playList) {
 			if (item instanceof Song) {
 				firstSong = (Song) item;
 				indexFirstSong = playList.indexOf(firstSong);
 				System.out.println(firstSong.toString());
 				this.playList.remove(indexFirstSong);
-				
+
 				int indexAfterFirstSong = indexFirstSong;
 				Item itemAfterFirstSong = playList.get(indexAfterFirstSong);
-				
+
 				if (itemAfterFirstSong instanceof Advertisement) {
 					System.out.println(itemAfterFirstSong.toString());
 					this.playList.remove(indexAfterFirstSong);
 				}
 				break;
+			} else {
+				System.out.println("Your playList contains no more songs.");
 			}
 		}
-		
+		removeFromSongs(firstSong);
+
+	}
+
+	private void removeFromSongs(Song firstSong) {
 		for (Iterator<Song> iterator = songs.iterator(); iterator.hasNext();) {
 			Song song = iterator.next();
 			if (song.equals(firstSong)) {
@@ -101,17 +104,16 @@ public class Playlist implements Player {
 	@Override
 	public void stop() {
 		System.out.println("Thank you for playing, the application has stopped :-)");
-		
+
 	}
 
-	
 //	Through questions you ask the user to fill in all the necessary data for the CD and the
 //	songs in the CD. To ease reading in, you may ask the user to specify the number of
 //	songs he/she is going to enter.
-	
+
 //	After adding the CD+songs, add the songs to the playlist and introduce adds in
 //	between the songs (for ease you can start at the first add again).
-	
+
 	@Override
 	public void addCD() {
 		System.out.println("PLEASE ENTER CD DETAILS.");
@@ -131,37 +133,36 @@ public class Playlist implements Player {
 		System.out.print("Total number of tracks: ");
 		int trackTotal = input.nextInt();
 		album.setTrackTotal(trackTotal);
-		
+
 		System.out.print("\nPLEASE ENTER SONG DETAILS.");
 		for (int i = 0; i < trackTotal; i++) {
-			int trackNumber = i+1;
+			int trackNumber = i + 1;
 			System.out.printf("\nTrack number: %d\n", trackNumber);
-			
-			input.nextLine(); //reset scanner
-			
+
+			input.nextLine(); // reset scanner
+
 			System.out.print("Song title: ");
 			String title = input.nextLine();
-			
+
 			System.out.print("Length (minutes:seconds): ");
 			String length = input.next();
-			
+
 			Song song = new Song(trackNumber, title, length);
 			album.addSong(song);
 		}
-		
+
 //		After adding the CD+songs, add the songs to the playlist and introduce adds in
 //		between the songs (for ease you can start at the first add again).
 		playList.addAll(album.getSongs());
-		
+
 		for (int i = 0; i < playList.size() - 1; i++) {
-			
+
 		}
-		
+
 		playList.addAll(adverts);
-				
+
 	}
-	
-	
+
 //	The playlist is shown on screen in the following format:
 //	Album: U2’s Songs of Innocence
 //	Track The Miracle (4:15)
@@ -171,10 +172,10 @@ public class Playlist implements Player {
 //	Next add: Bol.com (0:15)
 	public String toString() {
 		StringBuilder playListString = new StringBuilder();
-		for (Item item: playList) {
+		for (Item item : playList) {
 			System.out.println(item.toString());
 		}
-		
+
 		return playListString.toString();
 	}
 
