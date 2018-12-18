@@ -16,9 +16,6 @@ public class Song extends Item {
 		this.name = title;
 		this.lengthString = lengthString;
 
-//		calculateSecs(this.lengthString);
-//		this.totalSecs = calculateSecs(lengthString);
-//		this.timeString  = String.format("%02d:%02d", minutes, seconds);
 
 	}
 
@@ -26,8 +23,6 @@ public class Song extends Item {
 
 	}
 
-//	Track The Miracle (4:15)
-	
 	@Override
 	public String toString() {
 		StringBuilder songString = new StringBuilder();
@@ -36,6 +31,11 @@ public class Song extends Item {
 
 		return songString.toString();
 
+	}
+	
+	@Override
+	public boolean equals(Object o) {
+		return this.equals(o);
 	}
 	
 }

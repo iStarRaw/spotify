@@ -27,5 +27,10 @@ public class Advertisement extends Item {
 		
 		return addString.toString();
 	}
+	
+	@Override
+	public boolean equals(Object o) {
+		return this.equals(o);
+	}
 
 }

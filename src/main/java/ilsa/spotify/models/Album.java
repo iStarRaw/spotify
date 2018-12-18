@@ -56,5 +56,10 @@ public class Album {
 		return albumString.toString();
 		
 	}
+	
+	@Override
+	public boolean equals(Object o) {
+		return this.equals(o);
+	}
 
 }
