@@ -45,15 +45,15 @@ public class StringList {
 
 	}
 
-	private void addSongToAlbum(Song song, Album album) {
-		album.addSong(song);
+	private void addSongToAlbum(Item song, Album album) {
+		album.addSong((Song) song);
 
 	}
 
 	public List<Item> makePlayList() {
 		Album album = new Album();
-		Song song = new Song();
-		Advertisement advert = new Advertisement();
+		Item song = new Song();
+		Item advert = new Advertisement();
 		List<Song> songs = new ArrayList<>();
 		List<Advertisement> adverts = new ArrayList<>();
 
@@ -63,11 +63,11 @@ public class StringList {
 			} else if (line.startsWith("SONG ")) {
 				song = saveSong(line);
 				addSongToAlbum(song, album);
-				songs.add(song);
+				songs.add((Song) song);
 
 			} else if (line.startsWith("ADD ")) {
 				advert = saveAdvert(line);
-				adverts.add(advert);
+				adverts.add((Advertisement) advert);
 			}
 		}
 		return mergeLists(songs, adverts);
@@ -80,20 +80,27 @@ public class StringList {
 //	again.
 	public List<Item> mergeLists(List<Song> songs, List<Advertisement> adverts) {
 		List<Item> playList = new ArrayList<>();
-		int lengthNewList = songs.size() + adverts.size();
+		int lastIndexAdverts = adverts.size() - 1;
+		int count = 0;
+		
+		// You stop when the songs are exhausted.
+		for (int i = 0; i < songs.size(); i++) {
+			playList.add(songs.get(i));
 
-		for (int i = 0; i < lengthNewList; i++) {
-			// You stop when the songs are exhausted.
-			if (i < songs.size() - 1) {
-				playList.add(songs.get(i));
-//				If the advertisements should
-//				be exhausted before all your songs are exhausted, start from the first advertisement
-//				again.
-				if (i > adverts.size()) {
-					playList.add(adverts.get(i - adverts.size() - 1));
-				}
+			if (i < adverts.size()) {
+				playList.add(adverts.get(i));
+			} 
+//			If the advertisements should
+//			be exhausted before all your songs are exhausted, start from the first advertisement
+//			again.
+			else {
+				int indexAdvertToGet = i - lastIndexAdverts + count;
+				Item advertToAdd = (Advertisement) playList.get(indexAdvertToGet);
+				playList.add(advertToAdd);
+				count++;
 			}
 		}
+
 		return playList;
 
 	}

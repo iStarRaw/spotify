@@ -8,6 +8,7 @@ package ilsa.spotify.models;
  */
 public class Song extends Item {
 	private int trackNumber;
+	private Album album;
 	
 	private final String PREFIX_TRACK = "TRACK: ";
 
@@ -16,11 +17,18 @@ public class Song extends Item {
 		this.name = title;
 		this.lengthString = lengthString;
 
-
 	}
 
 	public Song() {
-
+		
+	}
+	
+	public Album getAlbum() {
+		return this.album;
+	}
+	
+	public void setAlbum(Album album) {
+		this.album = album;
 	}
 
 	@Override
@@ -35,7 +43,7 @@ public class Song extends Item {
 	
 	@Override
 	public boolean equals(Object o) {
-		return this.equals(o);
+		return o instanceof Song;
 	}
 	
 }

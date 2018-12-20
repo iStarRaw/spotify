@@ -9,11 +9,13 @@ public class Playlist implements Player {
 	private List<Song> songs;
 	private List<Item> playList;
 	private List<Advertisement> adverts;
+	private List<Album> albums;
 
 	public Playlist() {
 		playList = new ArrayList<>();
 		adverts = new ArrayList<>();
 		songs = new ArrayList<>();
+		albums = new ArrayList<>();
 
 	}
 
@@ -27,7 +29,11 @@ public class Playlist implements Player {
 
 	@Override
 	public void show() {
-		System.out.println(this.toString());
+		if (!playList.isEmpty()) {
+			System.out.println(this.toString());
+		} else {
+			System.out.println("Your playlist is empty.\n");
+		}
 	}
 
 //	Instead of taking the first song in the playlist, you need to shuffle the playlist. You
@@ -64,32 +70,30 @@ public class Playlist implements Player {
 
 	@Override
 	public void play() {
-		Song firstSong = null;
-		Advertisement firstAd = null;
 		int indexFirstSong = 0;
 
-		// TODO wat gebeurt er met een playList zonder songs???
-		for (Item item : playList) {
-			if (item instanceof Song) {
-				firstSong = (Song) item;
-				indexFirstSong = playList.indexOf(firstSong);
-				System.out.println(firstSong.toString());
-				this.playList.remove(indexFirstSong);
+		if (playList.isEmpty()) {
+			System.out.println("Your playlist is empty.\n");
+		} else {
+			for (Item item : playList) {
+				if (item instanceof Song) {
+					System.out.println(item.toString());
+					indexFirstSong = playList.indexOf(item);
 
-				int indexAfterFirstSong = indexFirstSong;
-				Item itemAfterFirstSong = playList.get(indexAfterFirstSong);
+					playList.remove(indexFirstSong);
+					removeFromSongs((Song) item);
 
-				if (itemAfterFirstSong instanceof Advertisement) {
-					System.out.println(itemAfterFirstSong.toString());
-					this.playList.remove(indexAfterFirstSong);
+					int indexAfterFirstSong = indexFirstSong;
+					Item itemAfterFirstSong = playList.get(indexAfterFirstSong);
+
+					if (itemAfterFirstSong instanceof Advertisement) {
+						System.out.println(itemAfterFirstSong.toString() + "\n");
+						this.playList.remove(indexAfterFirstSong);
+					}
+					break;
 				}
-				break;
-			} else {
-				System.out.println("Your playList contains no more songs.");
 			}
 		}
-		removeFromSongs(firstSong);
-
 	}
 
 	private void removeFromSongs(Song firstSong) {
@@ -116,6 +120,7 @@ public class Playlist implements Player {
 
 	@Override
 	public void addCD() {
+		deleteSongs();
 		System.out.println("PLEASE ENTER CD DETAILS.");
 		System.out.print("CD\nArtist: ");
 		Scanner input = new Scanner(System.in);
@@ -129,6 +134,7 @@ public class Playlist implements Player {
 		int releaseDate = input.nextInt();
 
 		Album album = new Album(artist, name, releaseDate);
+		albums.add(album);
 
 		System.out.print("Total number of tracks: ");
 		int trackTotal = input.nextInt();
@@ -158,9 +164,18 @@ public class Playlist implements Player {
 		for (int i = 0; i < playList.size() - 1; i++) {
 
 		}
-
 		playList.addAll(adverts);
 
+	}
+
+	private List<Item> deleteSongs() {
+		for (Iterator<Item> iterator = playList.iterator(); iterator.hasNext();) {
+			Item item = iterator.next();
+			if (item instanceof Song) {
+				iterator.remove();
+			}
+		}
+		return playList;
 	}
 
 //	The playlist is shown on screen in the following format:
@@ -170,13 +185,26 @@ public class Playlist implements Player {
 //	Album: U2’s Songs of Innocence
 //	Track Every Breaking Wave (4:12)
 //	Next add: Bol.com (0:15)
+	
+	//TODO afmaken!!!!!
 	public String toString() {
 		StringBuilder playListString = new StringBuilder();
 		for (Item item : playList) {
+			Album tempAlbum = null;
+			if (item instanceof Song) {
+				
+				Album thisAlbum = ((Song) item).getAlbum();
+				if (tempAlbum.equals(thisAlbum)) {
+				System.out.println(tempAlbum.toString());
+				}
+				
+				}
+			
 			System.out.println(item.toString());
+			
 		}
-
 		return playListString.toString();
+		
 	}
 
 }

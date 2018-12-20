@@ -59,7 +59,7 @@ public class Album {
 	
 	@Override
 	public boolean equals(Object o) {
-		return this.equals(o);
+		return o instanceof Album;
 	}
 
 }

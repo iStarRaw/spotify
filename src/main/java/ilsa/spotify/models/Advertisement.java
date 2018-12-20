@@ -30,7 +30,7 @@ public class Advertisement extends Item {
 	
 	@Override
 	public boolean equals(Object o) {
-		return this.equals(o);
+		return o instanceof Advertisement;
 	}
 
 }
