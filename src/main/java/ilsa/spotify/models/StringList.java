@@ -89,8 +89,8 @@ public class StringList {
 //				If the advertisements should
 //				be exhausted before all your songs are exhausted, start from the first advertisement
 //				again.
-				if (i / 2 < adverts.size() - 1) {
-					playList.add(adverts.get(i));
+				if (i > adverts.size()) {
+					playList.add(adverts.get(i - adverts.size() - 1));
 				}
 			}
 		}

@@ -91,9 +91,12 @@ public class App {
 	}
 
 	private static StringList writeFile(URL file) throws FileNotFoundException {
-
+		//huidige afspeellijst terugzetten naar stringFile
+		
+		
 		return null;
 
 	}
+	
 
 }
