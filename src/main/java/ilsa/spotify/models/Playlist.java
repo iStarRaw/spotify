@@ -189,10 +189,11 @@ public class Playlist implements Player {
 	//TODO afmaken!!!!!
 	public String toString() {
 		StringBuilder playListString = new StringBuilder();
+		Album tempAlbum = ((Song) playList.get(0)).getAlbum();;
+		
 		for (Item item : playList) {
-			Album tempAlbum = null;
+			
 			if (item instanceof Song) {
-				
 				Album thisAlbum = ((Song) item).getAlbum();
 				if (tempAlbum.equals(thisAlbum)) {
 				System.out.println(tempAlbum.toString());
