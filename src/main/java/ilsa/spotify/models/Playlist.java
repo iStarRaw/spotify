@@ -120,7 +120,7 @@ public class Playlist implements Player {
 
 	@Override
 	public void addCD() {
-		deleteSongs();
+		emptyPlayList();
 		System.out.println("PLEASE ENTER CD DETAILS.");
 		System.out.print("CD\nArtist: ");
 		Scanner input = new Scanner(System.in);
@@ -155,41 +155,66 @@ public class Playlist implements Player {
 
 			Song song = new Song(trackNumber, title, length);
 			album.addSong(song);
+			song.setAlbum(album);
 		}
 
 //		After adding the CD+songs, add the songs to the playlist and introduce adds in
 //		between the songs (for ease you can start at the first add again).
-		playList.addAll(album.getSongs());
-
-		for (int i = 0; i < playList.size() - 1; i++) {
-
-		}
-		playList.addAll(adverts);
+		songs.addAll(album.getSongs());
+		mergeToPlayList();
 
 	}
 
-	private List<Item> deleteSongs() {
+	private void emptyPlayList() {
+		deleteSongs();
+		moveAndDeleteAdverts();
+		
+	}
+
+	private void deleteSongs() {
 		for (Iterator<Item> iterator = playList.iterator(); iterator.hasNext();) {
 			Item item = iterator.next();
 			if (item instanceof Song) {
 				iterator.remove();
 			}
 		}
-		return playList;
+	}
+	
+	private void moveAndDeleteAdverts() {
+		for (Iterator<Item> iterator = playList.iterator(); iterator.hasNext();) {
+			Item item = iterator.next();
+			if (item instanceof Advertisement) {
+				adverts.add((Advertisement) item);
+				iterator.remove();
+			}
+		}
+	}
+	
+	public void mergeToPlayList() {
+		int lastIndexAdverts = adverts.size() - 1;
+		int count = 0;
+		
+		// You stop when the songs are exhausted.
+		for (int i = 0; i < songs.size(); i++) {
+			playList.add(songs.get(i));
+
+			if (i < adverts.size()) {
+				playList.add(adverts.get(i));
+			} 
+//			If the advertisements should
+//			be exhausted before all your songs are exhausted, start from the first advertisement
+//			again.
+			else {
+				int indexAdvertToGet = i - lastIndexAdverts + count;
+				Item advertToAdd = (Advertisement) playList.get(indexAdvertToGet);
+				playList.add(advertToAdd);
+				count++;
+			}
+		}
 	}
 
-//	The playlist is shown on screen in the following format:
-//	Album: U2’s Songs of Innocence
-//	Track The Miracle (4:15)
-//	Next add: ING Bank (0:20)
-//	Album: U2’s Songs of Innocence
-//	Track Every Breaking Wave (4:12)
-//	Next add: Bol.com (0:15)
-
-	// TODO afmaken!!!!!
 	public String toString() {
 		StringBuilder playListString = new StringBuilder();
-
 		Album thisAlbum = null;
 		Album tempAlbum = null;
 
@@ -197,12 +222,12 @@ public class Playlist implements Player {
 
 			if (item instanceof Song) {
 				thisAlbum = ((Song) item).getAlbum();
-				boolean isSameAlbum = thisAlbum.equals(tempAlbum);
+//				boolean isSameAlbum = thisAlbum.equals(tempAlbum);
 
 				if (tempAlbum == null) {
 					System.out.println(thisAlbum.toString());
 
-				} else if (!isSameAlbum) {
+				} else if (!thisAlbum.equals(tempAlbum)) {
 					System.out.println("\n" + thisAlbum.toString());
 				}
 			}
