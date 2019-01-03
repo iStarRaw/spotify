@@ -189,6 +189,7 @@ public class Playlist implements Player {
 	// TODO afmaken!!!!!
 	public String toString() {
 		StringBuilder playListString = new StringBuilder();
+
 		Album thisAlbum = null;
 		Album tempAlbum = null;
 
@@ -197,17 +198,18 @@ public class Playlist implements Player {
 			if (item instanceof Song) {
 				thisAlbum = ((Song) item).getAlbum();
 				boolean isSameAlbum = thisAlbum.equals(tempAlbum);
-		
+
 				if (tempAlbum == null) {
 					System.out.println(thisAlbum.toString());
-					
+
 				} else if (!isSameAlbum) {
 					System.out.println("\n" + thisAlbum.toString());
-				} 
+				}
 			}
+
 			System.out.println(item.toString());
 			tempAlbum = thisAlbum;
-			
+
 		}
 		return playListString.toString();
 
