@@ -1,5 +1,7 @@
 package ilsa.spotify.models;
 
+import java.util.List;
+
 public interface Player {
 	
 	void show();

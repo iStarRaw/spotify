@@ -27,6 +27,14 @@ public class Playlist implements Player {
 		this.playList = playList;
 	}
 
+	public List<Song> getSongs() {
+		return songs;
+	}
+
+	public List<Advertisement> getAdverts() {
+		return adverts;
+	}
+
 	@Override
 	public void show() {
 		if (!playList.isEmpty()) {
@@ -36,38 +44,40 @@ public class Playlist implements Player {
 		}
 	}
 
-//	Instead of taking the first song in the playlist, you need to shuffle the playlist. You
-//	should do this by using appropriate functionality in the Collections class. After
-//	shuffling the playlist, you take the two entries at the top and display those (similar to
-//	Option 3).
-//	Subsequently, the top 2 entries are removed the playlist. Also remove the song from
-//	the datastructure containing the songs.
-//	Hint 1: using any other way for shuffling will not give you points.
-//	Hint 2: it might be that after shuffling songs and adds do not follow a nice pattern
-//	anymore (which is OK!)
-
-//	Both for option 3 and 4 there is one more step to take: all songs that have not been
-//	played yet should be written back to file. In addition, all adds, whether played or not
-//	should also be written back to file again.
-//	Similarly to the original file, the CDs/songs should go first. Then the adds (mind you,
-//	all adds should be written back to file, also those that have been played).
-
+	/**
+	 * TODO Instead of taking the first song in the playlist, you need to shuffle the
+	 * playlist. You should do this by using appropriate functionality in the
+	 * Collections class. After shuffling the playlist, you take the two entries at
+	 * the top and display those (similar to Option 3). Subsequently, the top 2
+	 * entries are removed the playlist. Also remove the song from the datastructure
+	 * containing the songs. Hint 1: using any other way for shuffling will not give
+	 * you points. Hint 2: it might be that after shuffling songs and adds do not
+	 * follow a nice pattern anymore (which is OK!)
+	 * 
+	 * Both for option 3 and 4 there is one more step to take: all songs that have
+	 * not been played yet should be written back to file. In addition, all adds,
+	 * whether played or not should also be written back to file again. Similarly to
+	 * the original file, the CDs/songs should go first. Then the adds (mind you,
+	 * all adds should be written back to file, also those that have been played).
+	 */
 	@Override
 	public void shuffle() {
 		// TODO Auto-generated method stub
 
 	}
 
-//	When the user selects play, the first song in the playlist is shown on screen, similarly
-//	to in Option 1. Also, the add that immediately follows the song is shown on screen
-//	(again similarly to Option 1).
-//	Subsequently, the song and the add are removed from the playlist. Also remove the
-//	song from the datastructure containing the songs. all songs that have not been
-//	played yet should be written back to file. In addition, all adds, whether played or not
-//	should also be written back to file again.
-//	Similarly to the original file, the CDs/songs should go first. Then the adds (mind you,
-//	all adds should be written back to file, also those that have been played).
-
+	/**
+	 * When the user selects play, the first song in the playlist is shown on
+	 * screen, similarly to in Option 1. Also, the add that immediately follows the
+	 * song is shown on screen (again similarly to Option 1). Subsequently, the song
+	 * and the add are removed from the playlist. Also remove the song from the
+	 * datastructure containing the songs. 
+	 * TODO all songs that have not been played yet
+	 * should be written back to file. In addition, all adds, whether played or not
+	 * should also be written back to file again. Similarly to the original file,
+	 * the CDs/songs should go first. Then the adds (mind you, all adds should be
+	 * written back to file, also those that have been played).
+	 */
 	@Override
 	public void play() {
 		int indexFirstSong = 0;
@@ -111,13 +121,13 @@ public class Playlist implements Player {
 
 	}
 
-//	Through questions you ask the user to fill in all the necessary data for the CD and the
-//	songs in the CD. To ease reading in, you may ask the user to specify the number of
-//	songs he/she is going to enter.
-
-//	After adding the CD+songs, add the songs to the playlist and introduce adds in
-//	between the songs (for ease you can start at the first add again).
-
+	/**
+	 * Through questions you ask the user to fill in all the necessary data for the
+	 * CD and the songs in the CD. To ease reading in, you may ask the user to
+	 * specify the number of songs he/she is going to enter. After adding the
+	 * CD+songs, add the songs to the playlist and introduce adds in between the
+	 * songs (for ease you can start at the first add again).
+	 */
 	@Override
 	public void addCD() {
 		emptyPlayList();
@@ -156,10 +166,8 @@ public class Playlist implements Player {
 			Song song = new Song(trackNumber, title, length);
 			album.addSong(song);
 			song.setAlbum(album);
-		}
 
-//		After adding the CD+songs, add the songs to the playlist and introduce adds in
-//		between the songs (for ease you can start at the first add again).
+		}
 		songs.addAll(album.getSongs());
 		mergeToPlayList();
 
@@ -168,7 +176,7 @@ public class Playlist implements Player {
 	private void emptyPlayList() {
 		deleteSongs();
 		moveAndDeleteAdverts();
-		
+
 	}
 
 	private void deleteSongs() {
@@ -179,7 +187,7 @@ public class Playlist implements Player {
 			}
 		}
 	}
-	
+
 	private void moveAndDeleteAdverts() {
 		for (Iterator<Item> iterator = playList.iterator(); iterator.hasNext();) {
 			Item item = iterator.next();
@@ -189,22 +197,23 @@ public class Playlist implements Player {
 			}
 		}
 	}
-	
+
+	/**
+	 * You stop when the songs are exhausted. If the advertisements should be
+	 * exhausted before all your songs are exhausted, start from the first
+	 * advertisement again.
+	 * 
+	 */
 	public void mergeToPlayList() {
 		int lastIndexAdverts = adverts.size() - 1;
 		int count = 0;
-		
-		// You stop when the songs are exhausted.
+
 		for (int i = 0; i < songs.size(); i++) {
 			playList.add(songs.get(i));
 
 			if (i < adverts.size()) {
 				playList.add(adverts.get(i));
-			} 
-//			If the advertisements should
-//			be exhausted before all your songs are exhausted, start from the first advertisement
-//			again.
-			else {
+			} else {
 				int indexAdvertToGet = i - lastIndexAdverts + count;
 				Item advertToAdd = (Advertisement) playList.get(indexAdvertToGet);
 				playList.add(advertToAdd);
@@ -219,19 +228,17 @@ public class Playlist implements Player {
 		Album tempAlbum = null;
 
 		for (Item item : playList) {
-
+			
 			if (item instanceof Song) {
 				thisAlbum = ((Song) item).getAlbum();
-//				boolean isSameAlbum = thisAlbum.equals(tempAlbum);
+				boolean isSameAlbum = thisAlbum.equals(tempAlbum);
 
 				if (tempAlbum == null) {
 					System.out.println(thisAlbum.toString());
-
-				} else if (!thisAlbum.equals(tempAlbum)) {
+				} else if (!isSameAlbum) {
 					System.out.println("\n" + thisAlbum.toString());
 				}
 			}
-
 			System.out.println(item.toString());
 			tempAlbum = thisAlbum;
 

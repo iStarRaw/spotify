@@ -75,6 +75,7 @@ public class StringList {
 
 	}
 
+	
 //	To perform this merge, iterate over all songs and after each song you add an
 //	advertisement. You stop when the songs are exhausted. If the advertisements should
 //	be exhausted before all your songs are exhausted, start from the first advertisement
@@ -84,16 +85,12 @@ public class StringList {
 		int lastIndexAdverts = adverts.size() - 1;
 		int count = 0;
 		
-		// You stop when the songs are exhausted.
 		for (int i = 0; i < songs.size(); i++) {
 			playList.add(songs.get(i));
 
 			if (i < adverts.size()) {
 				playList.add(adverts.get(i));
 			} 
-//			If the advertisements should
-//			be exhausted before all your songs are exhausted, start from the first advertisement
-//			again.
 			else {
 				int indexAdvertToGet = i - lastIndexAdverts + count;
 				Item advertToAdd = (Advertisement) playList.get(indexAdvertToGet);
@@ -101,7 +98,6 @@ public class StringList {
 				count++;
 			}
 		}
-
 		return playList;
 
 	}
@@ -111,6 +107,18 @@ public class StringList {
 		StringBuilder lineFile = new StringBuilder();
 		lines.forEach((line) -> lineFile.append(line).append("\n"));
 		return lineFile.toString();
+	}
+	
+	/**
+	 * all songs that have not been played yet should be written back to file. In
+	 * addition, all adds, whether played or not should also be written back to file
+	 * again. Similarly to the original file, the CDs/songs should go first. Then
+	 * the adds (mind you, all adds should be written back to file, also those that
+	 * have been played).
+	 */
+	public void makeCorrectFormat() {
+		//
+		
 	}
 
 }

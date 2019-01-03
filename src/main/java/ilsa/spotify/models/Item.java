@@ -1,7 +1,7 @@
 package ilsa.spotify.models;
 
 
-abstract class Item {
+public abstract class Item {
 	String name;
 	String lengthString;	
 	
