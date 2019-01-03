@@ -63,6 +63,7 @@ public class StringList {
 			} else if (line.startsWith("SONG ")) {
 				song = saveSong(line);
 				addSongToAlbum(song, album);
+				((Song) song).setAlbum(album);
 				songs.add((Song) song);
 
 			} else if (line.startsWith("ADD ")) {

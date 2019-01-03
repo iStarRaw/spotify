@@ -58,8 +58,20 @@ public class Album {
 	}
 	
 	@Override
-	public boolean equals(Object o) {
-		return o instanceof Album;
+	public boolean equals(Object other) {
+		
+		 if (!(other instanceof Album)) {
+		        return false;
+		    }
+
+		    Album that = (Album) other;
+
+		    // Custom equality check here.
+		    return this.getSongs().equals(that.getSongs())
+		        && this.name.equals(that.name);
+		
+		
+//		return o instanceof Album;
 	}
 
 }

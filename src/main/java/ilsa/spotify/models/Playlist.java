@@ -185,26 +185,32 @@ public class Playlist implements Player {
 //	Album: U2’s Songs of Innocence
 //	Track Every Breaking Wave (4:12)
 //	Next add: Bol.com (0:15)
-	
-	//TODO afmaken!!!!!
+
+	// TODO afmaken!!!!!
 	public String toString() {
 		StringBuilder playListString = new StringBuilder();
+		Album thisAlbum = null;
+		Album tempAlbum = null;
+
 		for (Item item : playList) {
-			Album tempAlbum = null;
+
 			if (item instanceof Song) {
-				
-				Album thisAlbum = ((Song) item).getAlbum();
-				if (tempAlbum.equals(thisAlbum)) {
-				System.out.println(tempAlbum.toString());
-				}
-				
-				}
-			
+				thisAlbum = ((Song) item).getAlbum();
+				boolean isSameAlbum = thisAlbum.equals(tempAlbum);
+		
+				if (tempAlbum == null) {
+					System.out.println(thisAlbum.toString());
+					
+				} else if (!isSameAlbum) {
+					System.out.println("\n" + thisAlbum.toString());
+				} 
+			}
 			System.out.println(item.toString());
+			tempAlbum = thisAlbum;
 			
 		}
 		return playListString.toString();
-		
+
 	}
 
 }
