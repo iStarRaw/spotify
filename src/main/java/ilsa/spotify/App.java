@@ -1,8 +1,10 @@
 package ilsa.spotify;
 
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
+import java.io.IOException;
 import java.net.URL;
 import java.util.Arrays;
 import java.util.List;
@@ -17,16 +19,17 @@ public class App {
 
 	public static void main(String[] args) {
 
-//		System.out.println("Please give your file name: ");
 		Scanner input = new Scanner(System.in);
-//		String fileName = input.next();
 		String fileName = "spotify.txt";
 		String fileNameEmpty = "newSpotify";
 		Playlist player = new Playlist();
 
 		final URL FILE_SPOTIFY = App.class.getClassLoader().getResource(fileName);
-		final URL FILE_WRITE = App.class.getClassLoader().getResource(fileNameEmpty);
-
+		
+		String dirName = System.getProperty("user.home");
+		final File dir = new File (dirName);
+		final File actualFile = new File (dir, fileNameEmpty);
+		
 		try {
 			StringList sList = readFile(FILE_SPOTIFY);
 			player.setPlayList(sList.makePlayList());
@@ -64,8 +67,12 @@ public class App {
 //				Similarly to the original file, the CDs/songs should go first. Then the adds (mind you,
 //				all adds should be written back to file, also those that have been played).
 				try {
-					writeFile(player, FILE_WRITE);
+					System.out.println("in try catch");
+					writeFile(player, actualFile);
 				} catch (FileNotFoundException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} catch (IOException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
@@ -100,22 +107,24 @@ public class App {
 	 * again. Similarly to the original file, the CDs/songs should go first. Then
 	 * the adds (mind you, all adds should be written back to file, also those that
 	 * have been played).
+	 * 
+	 * @throws IOException
 	 */
-	private static void writeFile(Playlist player, URL file) throws FileNotFoundException {
+	private static void writeFile(Playlist player, File file) throws IOException {
+		System.out.println("in writeFile");
 		StringList sList = new StringList();
+
+		List<String> listToExport = sList.makeFormatForFile(player.getPlayList());
 		
-		System.out.println("Dit is de playList: " + Arrays.toString(player.getPlayList().toArray()));
+		System.out.println("filename is: " + file);
 		
-		for (int i = 0; i < player.getPlayList().size(); i++) {
-			sList.getLines().add(player.getPlayList().get(i).toString());
+		try (FileWriter writer = new FileWriter(file)) {
+			for (int i = 0; i < listToExport.size(); i++) {
+				//TODO waar is de RABOBANK advertentie????
+				writer.write("\n");
+			}
 		}
-		
-		sList.makeCorrectFormat();
-		
-		sList.writeFile();
-		
-		
+
 	}
 
-	
 }

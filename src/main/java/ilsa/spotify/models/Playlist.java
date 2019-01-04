@@ -1,6 +1,7 @@
 package ilsa.spotify.models;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Scanner;
@@ -222,6 +223,7 @@ public class Playlist implements Player {
 		}
 	}
 
+	//TODO aanpassen naar return playListString
 	public String toString() {
 		StringBuilder playListString = new StringBuilder();
 		Album thisAlbum = null;

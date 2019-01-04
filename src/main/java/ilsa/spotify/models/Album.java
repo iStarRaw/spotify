@@ -15,7 +15,6 @@ public class Album {
 	private String artist;
 	private String name;
 	private int releaseYear;
-	private final String PREFIX_ALBUM = "ALBUM: ";
 	
 	public Album(String artist, String name, int releaseDate) {
 		this.artist = artist;
@@ -45,13 +44,19 @@ public class Album {
 		
 	}
 	
+	//CD U2, Songs of Innocence, 2014
+	public String revertToFileFormat() {
+		StringBuilder cdString = new StringBuilder();
+		cdString.append("CD ").append(artist).append(", ").append(name).append(", ").append(releaseYear);
+		return cdString.toString();
+	}
+	
 	
 	//Album: U2’s Songs of Innocence
-	
 	@Override
 	public String toString() {
 		StringBuilder albumString = new StringBuilder();
-		albumString.append(PREFIX_ALBUM).append(artist).append("'s ").append(name).append(" from ").append(releaseYear);
+		albumString.append("ALBUM: ").append(artist).append("'s ").append(name).append(" from ").append(releaseYear);
 		
 		return albumString.toString();
 		

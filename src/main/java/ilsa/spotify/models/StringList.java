@@ -1,6 +1,7 @@
 package ilsa.spotify.models;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class StringList {
@@ -75,7 +76,51 @@ public class StringList {
 
 	}
 
-	
+	/**
+	 * all songs that have not been played yet should be written back to file. In
+	 * addition, all adds, whether played or not should also be written back to file
+	 * again. Similarly to the original file, the CDs/songs should go first. Then
+	 * the adds (mind you, all adds should be written back to file, also those that
+	 * have been played).
+	 * 
+	 * @param playlist
+	 */
+	public List<String> makeFormatForFile(List<Item> playlist) {
+		Album thisCD = null;
+		Album tempCD = null;
+		List<String> adverts = new ArrayList<>();
+		List<String> linesToWrite = new ArrayList<>();
+		linesToWrite.add("CDS");
+		adverts.add("ADDS");
+
+		for (Item item : playlist) {
+			if (item instanceof Song) {
+
+				thisCD = ((Song) item).getAlbum();
+				boolean isSameAlbum = thisCD.equals(tempCD);
+
+				if (tempCD == null) {
+					linesToWrite.add(thisCD.revertToFileFormat());
+				} else if (!isSameAlbum) {
+					linesToWrite.add(thisCD.revertToFileFormat());
+				}
+				Song tempSong = (Song)item;
+				linesToWrite.add(tempSong.revertToFileFormat());
+
+			} else if (item instanceof Advertisement) {
+				Advertisement tempAdd = (Advertisement)item;
+				adverts.add(tempAdd.revertToFileFormat());
+
+			}
+			tempCD = thisCD;
+
+		}
+		linesToWrite.addAll(adverts);
+//		System.out.println(Arrays.toString(lines.toArray()));
+		return linesToWrite;
+
+	}
+
 //	To perform this merge, iterate over all songs and after each song you add an
 //	advertisement. You stop when the songs are exhausted. If the advertisements should
 //	be exhausted before all your songs are exhausted, start from the first advertisement
@@ -84,14 +129,13 @@ public class StringList {
 		List<Item> playList = new ArrayList<>();
 		int lastIndexAdverts = adverts.size() - 1;
 		int count = 0;
-		
+
 		for (int i = 0; i < songs.size(); i++) {
 			playList.add(songs.get(i));
 
 			if (i < adverts.size()) {
 				playList.add(adverts.get(i));
-			} 
-			else {
+			} else {
 				int indexAdvertToGet = i - lastIndexAdverts + count;
 				Item advertToAdd = (Advertisement) playList.get(indexAdvertToGet);
 				playList.add(advertToAdd);
@@ -107,18 +151,6 @@ public class StringList {
 		StringBuilder lineFile = new StringBuilder();
 		lines.forEach((line) -> lineFile.append(line).append("\n"));
 		return lineFile.toString();
-	}
-	
-	/**
-	 * all songs that have not been played yet should be written back to file. In
-	 * addition, all adds, whether played or not should also be written back to file
-	 * again. Similarly to the original file, the CDs/songs should go first. Then
-	 * the adds (mind you, all adds should be written back to file, also those that
-	 * have been played).
-	 */
-	public void makeCorrectFormat() {
-		//
-		
 	}
 
 }
