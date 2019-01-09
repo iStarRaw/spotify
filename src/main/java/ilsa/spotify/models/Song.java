@@ -46,8 +46,20 @@ public class Song extends Item {
 	}
 
 	@Override
-	public boolean equals(Object o) {
-		return o instanceof Song;
+	public boolean equals(Object other) {
+
+		 if (!(other instanceof Song)) {
+		        return false;
+		    }
+
+		    Song that = (Song) other;
+
+		    // Custom equality check here.
+		    return this.name.equals(that.name)
+		        && this.lengthString.equals(that.lengthString);
+		
+		
+//		return o instanceof Song;
 	}
 
 }

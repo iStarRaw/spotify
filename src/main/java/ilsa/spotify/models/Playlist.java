@@ -82,6 +82,8 @@ public class Playlist implements Player {
 	@Override
 	public void play() {
 		int indexFirstSong = 0;
+		
+		System.out.println("adverts in play: " + Arrays.toString(adverts.toArray()));
 
 		if (playList.isEmpty()) {
 			System.out.println("Your playlist is empty.\n");
@@ -223,7 +225,6 @@ public class Playlist implements Player {
 		}
 	}
 
-	//TODO aanpassen naar return playListString
 	public String toString() {
 		StringBuilder playListString = new StringBuilder();
 		Album thisAlbum = null;
@@ -236,12 +237,15 @@ public class Playlist implements Player {
 				boolean isSameAlbum = thisAlbum.equals(tempAlbum);
 
 				if (tempAlbum == null) {
-					System.out.println(thisAlbum.toString());
+					playListString.append(thisAlbum.toString());
+					playListString.append("\n");
 				} else if (!isSameAlbum) {
-					System.out.println("\n" + thisAlbum.toString());
+					playListString.append(thisAlbum.toString());
+					playListString.append("\n");
 				}
 			}
-			System.out.println(item.toString());
+			playListString.append(item.toString());
+			playListString.append("\n");
 			tempAlbum = thisAlbum;
 
 		}

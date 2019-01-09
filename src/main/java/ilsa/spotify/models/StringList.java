@@ -6,9 +6,11 @@ import java.util.List;
 
 public class StringList {
 	private List<String> lines;
+	private List<Advertisement> adverts;
 
 	public StringList() {
 		lines = new ArrayList<>();
+		adverts = new ArrayList<>();
 	}
 
 	public List<String> getLines() {
@@ -56,7 +58,7 @@ public class StringList {
 		Item song = new Song();
 		Item advert = new Advertisement();
 		List<Song> songs = new ArrayList<>();
-		List<Advertisement> adverts = new ArrayList<>();
+//		List<Advertisement> adverts = new ArrayList<>();
 
 		for (String line : lines) {
 			if (line.startsWith("CD ")) {
@@ -72,6 +74,7 @@ public class StringList {
 				adverts.add((Advertisement) advert);
 			}
 		}
+		System.out.println(Arrays.toString(adverts.toArray())); //hier is lijst goed
 		return mergeLists(songs, adverts);
 
 	}
@@ -85,13 +88,17 @@ public class StringList {
 	 * 
 	 * @param playlist
 	 */
-	public List<String> makeFormatForFile(List<Item> playlist) {
+	public List<String> makeFormatForFile(Playlist player) {
+		System.out.println(adverts.isEmpty());
 		Album thisCD = null;
 		Album tempCD = null;
-		List<String> adverts = new ArrayList<>();
+//		List<String> adverts = new ArrayList<>();
+		List<Item> playlist = player.getPlayList();
+		List<Advertisement> adverts = player.getAdverts();
+		
 		List<String> linesToWrite = new ArrayList<>();
 		linesToWrite.add("CDS");
-		adverts.add("ADDS");
+//		adverts.add("ADDS");
 
 		for (Item item : playlist) {
 			if (item instanceof Song) {
@@ -107,16 +114,26 @@ public class StringList {
 				Song tempSong = (Song)item;
 				linesToWrite.add(tempSong.revertToFileFormat());
 
-			} else if (item instanceof Advertisement) {
-				Advertisement tempAdd = (Advertisement)item;
-				adverts.add(tempAdd.revertToFileFormat());
-
-			}
+			} 
+//			else if (item instanceof Advertisement) {
+//				Advertisement tempAdd = (Advertisement)item;
+//				adverts.add(tempAdd.revertToFileFormat());
+//
+//			}
 			tempCD = thisCD;
-
+			
 		}
-		linesToWrite.addAll(adverts);
-//		System.out.println(Arrays.toString(lines.toArray()));
+		
+		linesToWrite.add("ADDS");
+		System.out.println(adverts.isEmpty()); // true hier terwijl hij false moet zijn!!!
+		
+		
+		for (int i = 0; i < adverts.size(); i++) {
+			linesToWrite.add(adverts.get(i).revertToFileFormat());
+		}
+		
+//		linesToWrite.addAll(adverts);
+		System.out.println(Arrays.toString(linesToWrite.toArray()));
 		return linesToWrite;
 
 	}

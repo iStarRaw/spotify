@@ -34,6 +34,7 @@ public class App {
 			StringList sList = readFile(FILE_SPOTIFY);
 			player.setPlayList(sList.makePlayList());
 			System.out.println(player.toString());
+			System.out.println(player.getAdverts().toString());
 
 			// opslaan als current playlist
 //			player = 
@@ -113,8 +114,11 @@ public class App {
 	private static void writeFile(Playlist player, File file) throws IOException {
 		System.out.println("in writeFile");
 		StringList sList = new StringList();
+		
+		System.out.println(player.getAdverts().toString());
 
-		List<String> listToExport = sList.makeFormatForFile(player.getPlayList());
+		List<String> listToExport = 
+				sList.makeFormatForFile(player);
 		
 		System.out.println("filename is: " + file);
 		
